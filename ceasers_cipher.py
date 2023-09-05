@@ -18,6 +18,7 @@ def encode(data, key):
     return resp
         
 
+
 def choice(message, options):
     resp = input(message).lower()
     if resp not in options:
@@ -31,7 +32,7 @@ def main():
     message_type = choice("do you wish too read from a file (F) or enter the message directly (D)? F/D ", ('f', 'd'))
     data = ''
     if message_type == 'd':
-        data = input("Enter the data you wish too encode: ")
+        data = input("Enter the data you wish too parse: ")
     else:
         fp = input("Enter the file path you wish too read from: ")
         with open(fp, 'r') as f:
@@ -41,6 +42,10 @@ def main():
     except ValueError:
         print("you entered an invalid integer, exiting...")
         return
+
+    if choice("Do you wish to encode (E) or decode (D)? E/D ", ('e','d')) == 'd':
+        offset *= -1
+    
     output_type = choice("do you wish too write too a file (F) or write too stdout (S)? F/S ", ('f','s'))
     output = encode(data, offset)
     if output_type == 'f':
